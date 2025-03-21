@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+
+       int ans = 0;
+       int xoring = x^y;
+       while(xoring>0){
+        ans+=(xoring&1);
+        xoring>>=1;
+       }
+       return ans;
+    }
+};
