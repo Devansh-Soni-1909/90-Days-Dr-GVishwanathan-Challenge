@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool checkValidCuts(int n, vector<vector<int>>& rectangles) {
+
+        vector<vector<int>> xAxis ;
+        vector<vector<int>> yAxis ;
+        for(auto i :rectangles ){
+
+            xAxis.push_back({i[0],i[2]});
+            yAxis.push_back({i[1],i[3]});
+        }
+
+        sort(xAxis.begin(),xAxis.end());
+        sort(yAxis.begin(),yAxis.end());
+
+        vector<vector<int>>  resultX = {xAxis[0]};
+          vector<vector<int>>  resultY = {yAxis[0]};
+
+        for(int i = 1 ; i < xAxis.size();i++){
+            if(xAxis[i][0]<resultX.back()[1]){
+                resultX.back()[1] = max(resultX.back()[1],xAxis[i][1]);
+            }
+            else{
+                resultX.push_back(xAxis[i]);
+            }
+
+        }
+
+        for(int i = 1 ; i < yAxis.size();i++){
+            if(yAxis[i][0]<resultY.back()[1]){
+                resultY.back()[1] = max(resultY.back()[1],yAxis[i][1]);
+            }
+            else{
+                resultY.push_back(yAxis[i]);
+            }
+
+        }
+
+        if(resultX.size()>=3 || resultY.size()>=3) return true;
+        else return false;
+        
+    }
+};
