@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int minOperations(vector<vector<int>>& grid, int x) {
+
+        vector<int> allNumbers;
+        int m = grid.size();
+        int n = grid[0].size();
+        for(int i = 0 ; i< m ;i++ ){
+            for(int j = 0 ; j < n;j++){
+                allNumbers.push_back(grid[i][j]);
+            }
+        }
+
+        sort(allNumbers.begin(),allNumbers.end());
+
+        int idx = (m*n)/2;
+        int median = allNumbers[idx];
+        int ans = 0;
+        for(int &num : allNumbers){
+            if(median%x != num%x) return -1;
+             ans += abs(median-num)/x;
+        }
+        return ans;
+        
+    }
+};
