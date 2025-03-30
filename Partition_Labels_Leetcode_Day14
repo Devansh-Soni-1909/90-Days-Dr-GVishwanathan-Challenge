@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+
+        int in = 0;
+       
+        map<char,int> mp;
+        for(int i = 0 ; i < s.size();i++){
+            mp[s[i]] = i;
+        }
+        vector<int> result;
+        while(in<s.size()){
+           int  end = mp[s[in]];
+
+           int j = in;
+           while(j<end){
+            end = max(end,mp[s[j]]);
+            j++;
+           }
+           result.push_back(j-in+1);
+           in=j+1;
+
+        }
+       return result;
+    
+    }
+};
