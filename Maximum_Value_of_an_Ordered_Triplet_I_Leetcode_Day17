@@ -1,0 +1,36 @@
+class Solution {
+public:
+    long long maximumTripletValue(vector<int>& nums) {
+
+        int n = nums.size();
+  
+
+        vector<int> leftMax(n, 0);
+        leftMax[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            leftMax[i] = max(leftMax[i - 1], nums[i]);
+        }
+    
+    
+        vector<int> rightMax(n, 0);
+        rightMax[n - 1] = nums[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = max(rightMax[i + 1], nums[i]);
+        }
+    
+    
+        long long  maxValue = 0;
+        for (int j = 1; j < n - 1; j++) {
+            int i_max = leftMax[j - 1];  
+            int k_max = rightMax[j + 1]; 
+    
+            if (i_max > nums[j] && k_max > 0) { 
+                maxValue = max(1LL*maxValue, 1LL*(i_max - nums[j]) * k_max);
+            }
+        }
+
+         return maxValue;
+
+        
+    }
+};
