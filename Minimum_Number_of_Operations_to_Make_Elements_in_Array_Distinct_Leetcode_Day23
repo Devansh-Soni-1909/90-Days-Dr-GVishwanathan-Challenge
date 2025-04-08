@@ -1,0 +1,45 @@
+class Solution {
+public:
+    bool checkAllDistinct(vector<int> arr){
+        if(arr.size() == 0) return true;
+        unordered_map<int,int> mp;
+        for(int i : arr){
+            mp[i]++;
+        }
+        for(auto i  : mp) {
+            if(i.second>1) return false;
+        }
+        return true;
+    }
+    int minimumOperations(vector<int>& nums) {
+
+        int ans = 0;
+        
+        while(nums.size()!=0){
+            if(nums.size()<3){
+                if(checkAllDistinct(nums)) return 0+ans;
+                else return 1+ans;
+            }
+
+            if(nums.size()>=3){
+
+            if(checkAllDistinct(nums)) return ans;
+            else {
+            nums.erase(nums.begin(),nums.begin()+3);
+            ans++;
+                
+            }
+            }
+           
+            
+
+        }
+
+        return ans;
+
+
+
+
+        
+    }
+};
