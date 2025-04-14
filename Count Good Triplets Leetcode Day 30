@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int countGoodTriplets(vector<int>& arr, int a, int b, int c) {
+
+        int count = 0;
+        int n = arr.size();
+        for(int j = 1;j<n-1;j++){
+            vector<int> valid_i;
+            for(int i = 0 ; i < j;i++){
+                if(abs(arr[i]-arr[j])<=a) valid_i.push_back(i);
+            }
+
+            for(int k = j+1;k<n;k++){
+                if(abs(arr[j]-arr[k])<=b){
+                    for(int i : valid_i){
+                        if(abs(arr[i]-arr[k])<=c) count++;
+                    }
+                }
+            }
+        }
+        return count;
+        
+    }
+};
