@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int addDigits(int num) {
+
+        if(num>=0 && num<=9) return num;
+
+        string t = to_string(num);
+      
+        int ans ;
+        while(t.size()!=1){
+            int n = stoi(t);
+            ans = 0;
+            while(n){
+                ans+=(n%10);
+                n/=10;
+
+            }
+            
+            t = to_string(ans);
+
+        }
+        return ans;
+        
+    }
+};
