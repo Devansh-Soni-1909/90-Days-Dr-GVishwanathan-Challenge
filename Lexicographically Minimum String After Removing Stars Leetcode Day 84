@@ -1,0 +1,35 @@
+class Solution {
+public:
+    typedef pair<char,int> P;
+
+    struct comp{
+        bool operator()(P& p1 , P& p2){
+            if(p1.first == p2.first){
+                return p1.second < p2.second;
+            }
+
+            return p1.first > p2.first;
+        }
+    };
+    string clearStars(string s) {
+        priority_queue<P,vector<P> , comp> minHeap;
+        for(int i = 0 ; i < s.size();i++){
+
+            if(s[i] == '*'){
+                int idx = minHeap.top().second;
+                s[idx] = '*';
+                 minHeap.pop();
+            }
+
+           else  minHeap.push({s[i],i});
+
+        }
+        string ans = "";
+        for(char ch : s){
+            if(ch!='*') ans+=ch;
+        }
+
+        return ans;
+
+    }
+};
